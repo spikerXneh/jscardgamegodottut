@@ -5,9 +5,11 @@ var screen_size
 var is_hovering_on_card
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_CARD_SLOT = 2
+var player_hand_reference
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	player_hand_reference = $"../PlayerHand"
 	
 func connect_card_signals(card):
 	card.connect("hovered", on_hovered_over_card)
@@ -58,15 +60,19 @@ func start_drag(card):
 	card.scale = Vector2(1,1)
 	
 func finish_drag():
-	if (card_being_dragged):
-		var card_slot_found = raycast_check_for_card_slot()
-		if card_slot_found and not card_slot_found.card_in_slot:
-			#card dropped in card slot
-			card_being_dragged.position = card_slot_found.position
-			card_being_dragged.get_node("%CollisionShape2D").disabled = true
-			card_slot_found.card_in_slot = true
-		card_being_dragged.scale = Vector2(1.05, 1.05)
-		card_being_dragged = null
+	#if (card_being_dragged):
+	card_being_dragged.scale = Vector2(1.05, 1.05)
+	var card_slot_found = raycast_check_for_card_slot()		
+	if card_slot_found and not card_slot_found.card_in_slot:
+		#card dropped in card slot
+		player_hand_reference.remove_card_from_hand(card_being_dragged)
+		card_being_dragged.position = card_slot_found.position
+		card_being_dragged.get_node("%CollisionShape2D").disabled = true
+		card_slot_found.card_in_slot = true
+	else:
+		player_hand_reference.add_card_to_hand(card_being_dragged)
+	card_being_dragged = null
+
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
