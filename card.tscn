@@ -9,12 +9,22 @@ size = Vector2(48, 73)
 [node name="Card" type="Node2D"]
 script = ExtResource("1_j3tqy")
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-47.3333, -72.3333)
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
+position = Vector2(15.7778, 24.1111)
+shape = SubResource("RectangleShape2D_glv2v")
+
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -72.0
 offset_top = -109.0
 offset_right = -24.0
 offset_bottom = -36.0
 scale = Vector2(3, 3)
+mouse_filter = 2
 color = Color(0.580735, 0.312976, 0.970069, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -32,10 +42,11 @@ grow_vertical = 2
 scale = Vector2(3, 3)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
 [node name="ColorRect2" type="ColorRect" parent="MarginContainer"]
 layout_mode = 2
@@ -47,19 +58,12 @@ offset_left = -60.0
 offset_top = 44.0
 offset_right = 60.0
 offset_bottom = 98.0
+mouse_filter = 2
 
 [node name="CardImage" type="Sprite2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(0, -10)
 scale = Vector2(3, 3)
 texture = ExtResource("1_kikvd")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-47.3333, -72.3333)
-scale = Vector2(3, 3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(15.7778, 24.1111)
-shape = SubResource("RectangleShape2D_glv2v")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
