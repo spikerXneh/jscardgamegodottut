@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://fsashnfpvsts"]
+[gd_scene load_steps=4 format=3 uid="uid://fsashnfpvsts"]
 
+[ext_resource type="Script" path="res://card.gd" id="1_j3tqy"]
 [ext_resource type="Texture2D" uid="uid://djgsxmvh3rwae" path="res://raw/pack_loreon_char_free/sword_1/hit_1.png" id="1_kikvd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glv2v"]
 size = Vector2(48, 73)
 
 [node name="Card" type="Node2D"]
+script = ExtResource("1_j3tqy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -72.0
@@ -39,6 +41,13 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 color = Color(1, 1, 1, 0.533333)
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+self_modulate = Color(0.230315, 0.230315, 0.230315, 1)
+offset_left = -60.0
+offset_top = 44.0
+offset_right = 60.0
+offset_bottom = 98.0
+
 [node name="CardImage" type="Sprite2D" parent="."]
 position = Vector2(0, -11)
 scale = Vector2(3, 3)
@@ -51,3 +60,6 @@ scale = Vector2(3, 3)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(15.7778, 24.1111)
 shape = SubResource("RectangleShape2D_glv2v")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
